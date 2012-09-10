@@ -1,0 +1,269 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>ルービックキューブ</title>
+
+<style>
+#wrap {
+	width:1300px;
+	height:400px;
+}
+#button {
+	width:650px;
+	height:400px;
+	background-color:#88F;
+	float:left;
+}
+#cube {
+	width:650px;
+	height:400px;
+	background-color:#DFA;
+	float:left;
+}
+#opencube {
+	width:650px;
+	height:300px;
+	background-color:#CCC;
+	float:left;
+}
+
+#samplecube {
+	width:230px;
+	height:200px;
+	float:left;
+}
+#sampleopencube {
+	width:328px;
+	height:249px;
+	float:left;
+}
+</style>
+
+
+<style type="text/css">
+#Aview {
+	-webkit-transform: rotate(40deg) skew(-20deg, -20deg) translate(270px,70px);
+	-moz-transform: rotate(40deg) skew(-20deg, -20deg) translate(270px,70px);
+}
+#Bview {
+	-webkit-transform: rotate(20deg) skew(20deg, 0deg) translate(145px,37px) scale(1.06);
+	-moz-transform: rotate(20deg) skew(20deg, 0deg) translate(146px,36px) scale(1.0605);
+}
+#Cview {
+	-webkit-transform: rotate(-20deg) skew(-20deg, -10deg) translate(300px,-156px) scale(1.052);
+	-moz-transform: rotate(-20deg) skew(-20deg, -10deg) translate(301px,-158px) scale(1.052);
+}
+
+
+#openAview{
+	width:650px;
+	height:150px;
+	-webkit-transform: translate(0px,0px) scale(0.50);
+	-moz-transform: translate(0px,0px) scale(0.50);
+}
+#openBview{
+	width:650px;
+	height:150px;
+	-webkit-transform: translate(0px,-90px) scale(0.50);
+	-moz-transform: translate(0px,-90px) scale(0.50);
+}
+#openCview{
+	width:650px;
+	height:150px;
+	-webkit-transform: translate(76px,-256px) scale(0.50);
+	-moz-transform: translate(76px,-256px) scale(0.50);
+}
+#openDview{
+	width:650px;
+	height:150px;
+	-webkit-transform: translate(152px,-422px) scale(0.50);
+	-moz-transform: translate(152px,-422px) scale(0.50);
+}
+#openEview{
+	width:650px;
+	height:150px;
+	-webkit-transform: translate(-76px,-588px) scale(0.50);
+	-moz-transform: translate(-76px,-588px) scale(0.50);
+}
+#openFview{
+	width:650px;
+	height:150px;
+	-webkit-transform: translate(0px,-678px) scale(0.50);
+	-moz-transform: translate(0px,-678px) scale(0.50);
+}
+
+</style>
+
+</head>
+
+<script type="text/javascript" src="./cube.js"></script>
+
+
+<body>
+
+<div id="wrap">
+<div id="button">
+    <p>
+    	<input type="button" value="時計回りA" onClick="Rotation_A()" onMouseMove="viewChoose_A()" onMouseOut="viewCube()">
+        <input type="button" value="反時計回りA" onClick="ReverseRotation_A()" onMouseMove="viewChoose_A()" onMouseOut="viewCube()">
+        <input type="button" value="時計回りA_F" onClick="Rotation_A_F()" onMouseMove="viewChoose_AF()" onMouseOut="viewCube()">
+        <input type="button" value="反時計回りA_F" onClick="ReverseRotation_A_F()" onMouseMove="viewChoose_AF()" onMouseOut="viewCube()">
+        <input type="button" value="時計回りF" onClick="Rotation_F()" onMouseMove="viewChoose_F()" onMouseOut="viewCube()">
+        <input type="button" value="反時計回りF" onClick="ReverseRotation_F()" onMouseMove="viewChoose_F()" onMouseOut="viewCube()">
+    </p>
+    <p>
+    	<input type="button" value="時計回りB" onClick="Rotation_B()" onMouseMove="viewChoose_B()" onMouseOut="viewCube()">
+        <input type="button" value="反時計回りB" onClick="ReverseRotation_B()" onMouseMove="viewChoose_B()" onMouseOut="viewCube()">
+        <input type="button" value="時計回りB_D" onClick="Rotation_B_D()" onMouseMove="viewChoose_BD()" onMouseOut="viewCube()">
+        <input type="button" value="反時計回りB_D" onClick="ReverseRotation_B_D()" onMouseMove="viewChoose_BD()" onMouseOut="viewCube()">
+        <input type="button" value="時計回りD" onClick="Rotation_D()" onMouseMove="viewChoose_D()" onMouseOut="viewCube()">
+        <input type="button" value="反時計回りD" onClick="ReverseRotation_D()" onMouseMove="viewChoose_D()" onMouseOut="viewCube()">
+    </p>
+    <p>
+    	<input type="button" value="時計回りC" onClick="Rotation_C()" onMouseMove="viewChoose_C()" onMouseOut="viewCube()">
+        <input type="button" value="反時計回りC" onClick="ReverseRotation_C()" onMouseMove="viewChoose_C()" onMouseOut="viewCube()">
+        <input type="button" value="時計回りC_E" onClick="Rotation_C_E()" onMouseMove="viewChoose_CE()" onMouseOut="viewCube()">
+        <input type="button" value="反時計回りC_E" onClick="ReverseRotation_C_E()" onMouseMove="viewChoose_CE()" onMouseOut="viewCube()">
+        <input type="button" value="時計回りE" onClick="Rotation_E()" onMouseMove="viewChoose_E()" onMouseOut="viewCube()">
+        <input type="button" value="反時計回りE" onClick="ReverseRotation_E()" onMouseMove="viewChoose_E()" onMouseOut="viewCube()">
+    </p>
+    <p>
+    	<input type="button" value="90度右回転_A" onClick="Turn90_A()">
+        <input type="button" value="90度左回転_A" onClick="Turn90_Reverse_A()">
+        <input type="button" value="90度右回転_B" onClick="Turn90_B()">
+        <input type="button" value="90度左回転_B" onClick="Turn90_Reverse_B()">
+        <input type="button" value="90度右回転_C" onClick="Turn90_C()">
+        <input type="button" value="90度左回転_C" onClick="Turn90_Reverse_C()">
+    </p>
+    <input type="button" value="シャッフル" onClick="Shuffle()">
+
+</div>
+
+<div id="cube">
+	<p id="Aview">
+	<img src="waku.gif">
+    <img src="blue.gif" style="position:relative;  top:-102px; left:-157px;">
+    <img src="blue.gif" style="position:relative;  top:-102px; left:-162px;">
+    <img src="blue.gif" style="position:relative;  top:-102px; left:-167px;">
+    <img src="blue.gif" style="position:relative;  top:-52px; left:-322px;">
+    <img src="blue.gif" style="position:relative;  top:-52px; left:-327px;">
+    <img src="blue.gif" style="position:relative;  top:-52px; left:-332px;">
+    <img src="blue.gif" style="position:relative;  top:-2px; left:-487px;">
+    <img src="blue.gif" style="position:relative;  top:-2px; left:-492px;">
+    <img src="blue.gif" style="position:relative;  top:-2px; left:-497px;">
+    </p>
+    <p id="Bview">
+    <img src="waku.gif">
+    <img src="red.gif" style="position:relative;  top:-102px; left:-157px;">
+    <img src="red.gif" style="position:relative;  top:-102px; left:-162px;">
+    <img src="red.gif" style="position:relative;  top:-102px; left:-167px;">
+    <img src="red.gif" style="position:relative;  top:-52px; left:-322px;">
+    <img src="red.gif" style="position:relative;  top:-52px; left:-327px;">
+    <img src="red.gif" style="position:relative;  top:-52px; left:-332px;">
+    <img src="red.gif" style="position:relative;  top:-2px; left:-487px;">
+    <img src="red.gif" style="position:relative;  top:-2px; left:-492px;">
+    <img src="red.gif" style="position:relative;  top:-2px; left:-497px;">
+    </p>
+    <p id="Cview">
+    <img src="waku.gif">
+    <img src="green.gif" style="position:relative;  top:-102px; left:-157px;">
+    <img src="green.gif" style="position:relative;  top:-102px; left:-162px;">
+    <img src="green.gif" style="position:relative;  top:-102px; left:-167px;">
+    <img src="green.gif" style="position:relative;  top:-52px; left:-322px;">
+    <img src="green.gif" style="position:relative;  top:-52px; left:-327px;">
+    <img src="green.gif" style="position:relative;  top:-52px; left:-332px;">
+    <img src="green.gif" style="position:relative;  top:-2px; left:-487px;">
+    <img src="green.gif" style="position:relative;  top:-2px; left:-492px;">
+    <img src="green.gif" style="position:relative;  top:-2px; left:-497px;">
+    </p>
+</div>
+</div>
+
+
+<div id="opencube">
+    
+    <p id="openAview">
+    <img src="waku.gif">
+    <img src="blue.gif" style="position:relative;  top:-102px; left:-157px;">
+    <img src="blue.gif" style="position:relative;  top:-102px; left:-162px;">
+    <img src="blue.gif" style="position:relative;  top:-102px; left:-167px;">
+    <img src="blue.gif" style="position:relative;  top:-52px; left:-322px;">
+    <img src="blue.gif" style="position:relative;  top:-52px; left:-327px;">
+    <img src="blue.gif" style="position:relative;  top:-52px; left:-332px;">
+    <img src="blue.gif" style="position:relative;  top:-2px; left:-487px;">
+    <img src="blue.gif" style="position:relative;  top:-2px; left:-492px;">
+    <img src="blue.gif" style="position:relative;  top:-2px; left:-497px;">
+    </p>
+    <p id="openBview">
+    <img src="waku.gif">
+    <img src="red.gif" style="position:relative;  top:-102px; left:-157px;">
+    <img src="red.gif" style="position:relative;  top:-102px; left:-162px;">
+    <img src="red.gif" style="position:relative;  top:-102px; left:-167px;">
+    <img src="red.gif" style="position:relative;  top:-52px; left:-322px;">
+    <img src="red.gif" style="position:relative;  top:-52px; left:-327px;">
+    <img src="red.gif" style="position:relative;  top:-52px; left:-332px;">
+    <img src="red.gif" style="position:relative;  top:-2px; left:-487px;">
+    <img src="red.gif" style="position:relative;  top:-2px; left:-492px;">
+    <img src="red.gif" style="position:relative;  top:-2px; left:-497px;">
+    </p>
+    <p id="openCview">
+    <img src="waku.gif">
+    <img src="green.gif" style="position:relative;  top:-102px; left:-157px;">
+    <img src="green.gif" style="position:relative;  top:-102px; left:-162px;">
+    <img src="green.gif" style="position:relative;  top:-102px; left:-167px;">
+    <img src="green.gif" style="position:relative;  top:-52px; left:-322px;">
+    <img src="green.gif" style="position:relative;  top:-52px; left:-327px;">
+    <img src="green.gif" style="position:relative;  top:-52px; left:-332px;">
+    <img src="green.gif" style="position:relative;  top:-2px; left:-487px;">
+    <img src="green.gif" style="position:relative;  top:-2px; left:-492px;">
+    <img src="green.gif" style="position:relative;  top:-2px; left:-497px;">
+    </p>
+    <p id="openDview">
+    <img src="waku.gif">
+    <img src="orange.gif" style="position:relative;  top:-102px; left:-157px;">
+    <img src="orange.gif" style="position:relative;  top:-102px; left:-162px;">
+    <img src="orange.gif" style="position:relative;  top:-102px; left:-167px;">
+    <img src="orange.gif" style="position:relative;  top:-52px; left:-322px;">
+    <img src="orange.gif" style="position:relative;  top:-52px; left:-327px;">
+    <img src="orange.gif" style="position:relative;  top:-52px; left:-332px;">
+    <img src="orange.gif" style="position:relative;  top:-2px; left:-487px;">
+    <img src="orange.gif" style="position:relative;  top:-2px; left:-492px;">
+    <img src="orange.gif" style="position:relative;  top:-2px; left:-497px;">
+    </p>
+    <p id="openEview">
+    <img src="waku.gif">
+    <img src="yellow.gif" style="position:relative;  top:-102px; left:-157px;">
+    <img src="yellow.gif" style="position:relative;  top:-102px; left:-162px;">
+    <img src="yellow.gif" style="position:relative;  top:-102px; left:-167px;">
+    <img src="yellow.gif" style="position:relative;  top:-52px; left:-322px;">
+    <img src="yellow.gif" style="position:relative;  top:-52px; left:-327px;">
+    <img src="yellow.gif" style="position:relative;  top:-52px; left:-332px;">
+    <img src="yellow.gif" style="position:relative;  top:-2px; left:-487px;">
+    <img src="yellow.gif" style="position:relative;  top:-2px; left:-492px;">
+    <img src="yellow.gif" style="position:relative;  top:-2px; left:-497px;">
+    </p>
+    <p id="openFview">
+    <img src="waku.gif">
+    <img src="white.gif" style="position:relative;  top:-102px; left:-157px;">
+    <img src="white.gif" style="position:relative;  top:-102px; left:-162px;">
+    <img src="white.gif" style="position:relative;  top:-102px; left:-167px;">
+    <img src="white.gif" style="position:relative;  top:-52px; left:-322px;">
+    <img src="white.gif" style="position:relative;  top:-52px; left:-327px;">
+    <img src="white.gif" style="position:relative;  top:-52px; left:-332px;">
+    <img src="white.gif" style="position:relative;  top:-2px; left:-487px;">
+    <img src="white.gif" style="position:relative;  top:-2px; left:-492px;">
+    <img src="white.gif" style="position:relative;  top:-2px; left:-497px;">
+    </p>
+    
+</div>
+
+<div id="samplecube">
+	<img src="ABC.gif">
+</div>
+<div id="sampleopencube">
+	<img src="opencubeview.gif">
+</div>
+
+</body>
+</html>
